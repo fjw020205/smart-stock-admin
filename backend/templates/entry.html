@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>{{ app_name }} · {{ subtitle }}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(900px 600px at 15% 10%, rgba(22, 119, 255, .35), transparent 60%),
+        radial-gradient(700px 500px at 85% 90%, rgba(0, 196, 204, .22), transparent 60%),
+        linear-gradient(160deg, #061225 0%, #0b1b33 55%, #07182c 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+    }
+    .grid {
+      position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
+      pointer-events: none;
+    }
+    .card {
+      position: relative;
+      width: min(440px, 100%);
+      padding: 40px 36px 32px;
+      border-radius: 20px;
+      background: rgba(13, 30, 53, .72);
+      border: 1px solid rgba(255, 255, 255, .1);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .45);
+      backdrop-filter: blur(16px);
+      text-align: center;
+      animation: rise .5s ease-out both;
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .logo {
+      width: 60px; height: 60px; margin: 0 auto 20px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #1677ff, #37c2ff);
+      display: grid; place-items: center;
+      box-shadow: 0 12px 30px rgba(22, 119, 255, .45);
+    }
+    .logo svg { width: 32px; height: 32px; }
+    h1 { font-size: 26px; letter-spacing: 2px; font-weight: 700; }
+    .sub { margin-top: 8px; font-size: 13px; color: #8aa4c8; letter-spacing: 1px; }
+    .hint {
+      margin: 26px 0 18px;
+      font-size: 13px;
+      color: #a9c1e2;
+      min-height: 20px;
+    }
+    .actions { display: grid; gap: 12px; }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      height: 48px; border-radius: 12px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #1677ff, #2f8bff);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(22, 119, 255, .35);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(22, 119, 255, .45); }
+    .btn-ghost {
+      background: rgba(255, 255, 255, .06);
+      color: #d7e6fb;
+      border: 1px solid rgba(255, 255, 255, .14);
+    }
+    .btn-ghost:hover { background: rgba(255, 255, 255, .12); }
+    .foot { margin-top: 24px; font-size: 12px; color: #64809f; }
+    .status { display: inline-flex; align-items: center; gap: 6px; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #52c41a; box-shadow: 0 0 0 3px rgba(82,196,26,.16); }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <main class="card">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5 12 4l9 5.5v9L12 24l-9-5.5v-9Z" opacity=".9" transform="translate(0,-2) scale(1)" />
+        <path d="M3 9.5 12 15l9-5.5" />
+        <path d="M12 15v7.5" />
+      </svg>
+    </div>
+    <h1>{{ app_name }}</h1>
+    <div class="sub">{{ subtitle }}</div>
+    <div class="hint" id="hint">正在为你选择最佳版本…</div>
+    <div class="actions">
+      <a class="btn btn-primary" href="/pc/" id="pc-link">进入电脑端</a>
+      <a class="btn btn-ghost" href="/m/" id="m-link">进入手机端</a>
+    </div>
+    <div class="foot">
+      <span class="status"><span class="dot"></span> 服务运行中 · v{{ version }}</span>
+    </div>
+  </main>
+  <script>
+    (function () {
+      var isMobile = /Android|iPhone|iPad|iPod|Mobile|HarmonyOS|MicroMessenger/i.test(navigator.userAgent);
+      var hint = document.getElementById('hint');
+      var target = isMobile ? '/m/' : '/pc/';
+      hint.textContent = isMobile ? '正在进入手机端…' : '正在进入电脑端…';
+      setTimeout(function () { window.location.replace(target); }, 500);
+    })();
+  </script>
+</body>
+</html>

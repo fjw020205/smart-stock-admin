@@ -1,0 +1,226 @@
+:root {
+  --brand: #1677ff;
+  --brand-600: #0958d9;
+  --brand-soft: #e8f2ff;
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --ink: #0f172a;
+  --ink-2: #334155;
+  --muted: #64748b;
+  --line: #eef2f8;
+  --bg: #f5f7fa;
+
+  --van-primary-color: #1677ff;
+  --van-danger-color: #ef4444;
+  --van-text-color: #0f172a;
+  --van-text-color-2: #64748b;
+  --van-border-color: #eef2f8;
+  --van-radius-md: 10px;
+  --van-radius-lg: 14px;
+  --van-button-primary-background: #1677ff;
+  --van-tabbar-item-active-color: #1677ff;
+  --van-font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei',
+    'Hiragino Sans GB', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--van-font-family);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+#app {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---------- 通用布局 ---------- */
+.shell {
+  max-width: 640px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.shell.with-tabbar {
+  padding-bottom: calc(58px + env(safe-area-inset-bottom));
+}
+
+.page-pad {
+  padding: 0 14px 18px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 6px 20px -16px rgba(15, 23, 42, 0.28);
+}
+
+.section {
+  margin-top: 16px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 0 2px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.section-link {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.mono {
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 11px;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 顶部导航 ---------- */
+.van-nav-bar {
+  background: #fff;
+}
+
+.van-nav-bar__title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.van-nav-bar::after {
+  border-bottom-color: var(--line);
+}
+
+/* ---------- 表单 ---------- */
+.van-cell {
+  font-size: 14px;
+}
+
+.form-card .van-cell {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.form-card .van-cell:not(:last-child)::after {
+  left: 0;
+}
+
+/* ---------- 按钮 ---------- */
+.van-button {
+  font-weight: 600;
+}
+
+.van-button--large {
+  height: 48px;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+/* ---------- 标签 ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.pill.blue {
+  background: #e8f2ff;
+  color: #1677ff;
+}
+
+.pill.red {
+  background: #fdecec;
+  color: #ef4444;
+}
+
+.pill.green {
+  background: #e8f7ee;
+  color: #16a34a;
+}
+
+.pill.orange {
+  background: #fef4e2;
+  color: #d97706;
+}
+
+.pill.gray {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* ---------- 空状态 ---------- */
+.empty-wrap {
+  padding: 28px 0 12px;
+}
+
+/* ---------- 安全区 ---------- */
+.safe-bottom {
+  height: env(safe-area-inset-bottom);
+}
+
+.skeleton-block {
+  padding: 16px;
+}
+
+@media (min-width: 720px) {
+  .shell {
+    box-shadow: 0 0 60px -20px rgba(15, 23, 42, 0.25);
+  }
+  .van-tabbar--fixed {
+    max-width: 640px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .van-popup--bottom {
+    max-width: 640px;
+    left: 50%;
+    margin-left: -320px;
+  }
+}
