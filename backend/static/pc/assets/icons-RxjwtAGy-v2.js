@@ -1,0 +1,1 @@
+import{O as e,P as r}from"./index-D6kFOQRm-v2.js";function i(o){return o&&e[o]?e[o]:r}const n=["Odometer","Goods","Box","Download","Upload","Tickets","User","Lock","Menu","Setting","Folder","Grid","DataLine","Histogram","ShoppingCart","Files","PieChart","Van","OfficeBuilding"];export{n as I,i as r};

@@ -1,0 +1,84 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "启动后端",
+      "type": "shell",
+      "command": "\"${workspaceFolder}\\.venv\\Scripts\\python.exe\"",
+      "args": ["run.py"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "启动后端（Trae 预览）",
+      "type": "shell",
+      "command": "\"${workspaceFolder}\\.venv\\Scripts\\python.exe\"",
+      "args": ["run.py"],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "SMARTSTOCK_NO_BROWSER": "1",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONUTF8": "1"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "smartstock-preview",
+        "pattern": { "regexp": "^\\s*$" },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "智仓",
+          "endsPattern": "本机访问 : http://127\\.0\\.0\\.1:\\d+"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "focus": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "启动后端并配置预览",
+      "dependsOn": ["启动后端（Trae 预览）"],
+      "dependsOrder": "sequence",
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "前端 PC（pnpm dev）",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["dev"],
+      "options": { "cwd": "${workspaceFolder}/frontend-pc" },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "前端 H5（pnpm dev）",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["dev"],
+      "options": { "cwd": "${workspaceFolder}/frontend-h5" },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "运行测试",
+      "type": "shell",
+      "command": "\"${workspaceFolder}\\.venv\\Scripts\\python.exe\"",
+      "args": ["-m", "pytest", "-q"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "打包 exe",
+      "type": "shell",
+      "command": "\"${workspaceFolder}\\build\\build_exe.bat\"",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    }
+  ]
+}

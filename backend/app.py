@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import logging
+import mimetypes
 from pathlib import Path
 
 from flask import Flask, jsonify, render_template, request, send_from_directory
@@ -14,6 +15,23 @@ from .db import session
 from .security import AuthError
 
 logger = logging.getLogger("smartstock")
+
+# 部分 Windows 安装包会把 .js 的 Content Type 写成 text/plain，浏览器对
+# type="module" 的脚本做严格 MIME 校验，类型不对就直接不执行（页面空白）。
+# 这里显式固定前端资源类型，避免依赖系统注册表。
+for _suffix, _mime in (
+    (".js", "text/javascript"),
+    (".mjs", "text/javascript"),
+    (".css", "text/css"),
+    (".json", "application/json"),
+    (".map", "application/json"),
+    (".svg", "image/svg+xml"),
+    (".woff", "font/woff"),
+    (".woff2", "font/woff2"),
+    (".ttf", "font/ttf"),
+):
+    mimetypes.add_type(_mime, _suffix)
+
 
 BLUEPRINTS = [
     (auth.bp, "/api/auth"),

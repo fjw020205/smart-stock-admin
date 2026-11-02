@@ -16,6 +16,13 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    chunkSizeWarningLimit: 1200
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name]-[hash]-v2.js',
+        chunkFileNames: 'assets/[name]-[hash]-v2.js',
+        assetFileNames: 'assets/[name]-[hash]-v2[extname]'
+      }
+    }
   }
 })
